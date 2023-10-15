@@ -17,12 +17,10 @@ const addJogoDB = async (body) => {
     try {   
         const { nome, horas_jogadas, genero } = body; 
         const results = await pool.query(`INSERT INTO jogos (nome, horas_jogadas, genero) 
-            VALUES ($1, $2, $3)eneros (nome, horas_jogadas, genero) 
-            VALUES ($1, $2, $3)
-            returning codigo, nome, horas_jogadas, genero`,
+            VALUES ($1, $2, $3) returning codigo, nome, horas_jogadas, genero`,
         [nome, horas_jogadas, genero]);
         const jogo = results.rows[0];
-        return new Jogo(jogo.codigo, jogo.nome, produto.horas_jogadas, produto.genero, "");
+        return new Jogo(jogo.codigo, jogo.nome, jogo.horas_jogadas, jogo.genero, "");
     } catch (err) {
         throw "Erro ao inserir jogo: " + err;
     }    
